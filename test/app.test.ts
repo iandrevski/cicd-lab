@@ -39,3 +39,12 @@ test('GET /api/health returns a healthy response', async () => {
     status: 'ok',
   });
 });
+
+test('GET /api/version returns the app version', async () => {
+  const response = await fetch(`${baseUrl}/api/version`);
+  const body = (await response.json()) as { version: string };
+
+  assert.equal(response.status, 200);
+  assert.equal(typeof body.version, 'string');
+  assert.ok(body.version.length > 0);
+});
